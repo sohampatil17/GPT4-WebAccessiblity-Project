@@ -3,21 +3,21 @@
 <a href="https://ibb.co/3k8PNQB"><img src="https://i.ibb.co/9GfdTSs/Screenshot-2024-02-23-at-12-44-13-PM.png" alt="Screenshot-2024-02-23-at-12-44-13-PM" border="0"></a>
 
 ## Overview
-WebAlly is an advanced web accessibility evaluation tool designed to enhance digital inclusivity. It leverages the power of GPT-4 AI to provide detailed insights into website accessibility, aiming to make the digital world more accommodating for users with disabilities.
+WebAlly is an AI-powered code-writing software specifically designed for developers and designers to create ARIA-compliant websites. Its primary focus is on enhancing web accessibility for the disabled, particularly those with visual impairments. Leveraging the advanced capabilities of GPT-4 AI, WebAlly provides essential tools to make digital spaces more inclusive and accommodating.
 
 ## Key Functionalities
 
 ### Accessibility Report Generation
-After scraping the website code, WebAlly analyzes the site for potential accessibility issues using the scraped content. It utilizes GPT-4's advanced capabilities to interpret the site's elements, identifying areas that may impede accessibility.
+Utilizing BeautifulSoup for website scraping, WebAlly analyzes the site's HTML and CSS content for accessibility barriers. It employs GPT-4 AI to interpret and evaluate the site's elements, pinpointing specific areas that could hinder accessibility for users with disabilities.
 
 ### ARIA Compliance Scoring
-The application calculates an ARIA (Accessible Rich Internet Applications) compliance score on a scale of 0 to 10. This metric provides a quantitative assessment of the website's adherence to key accessibility standards.
+WebAlly computes an WW3C ARIA (Accessible Rich Internet Applications) compliance score ranging from 0 to 10. This score is a quantitative measure of the website's alignment with the W3C's ARIA accessibility standards, providing a clear assessment of its current accessibility status.
 
 ### Recommendations for Improvement
-WebAlly identifies accessibility issues and offers specific, actionable recommendations for improvement. These suggestions aim to enhance various aspects of web accessibility, such as navigational ease, readability, and overall compliance.
+Beyond identifying issues, WebAlly provides actionable recommendations to enhance web accessibility. These suggestions are tailored to improve navigational ease, readability, and overall compliance with web accessibility guidelines.
 
 ### Updated Code Generation
-In addition to providing recommendations, WebAlly generates updated code that implements these suggestions. This feature aids developers in quickly making their websites more accessible.
+WebAlly's most notable feature is its ability to generate updated code that implements its recommendations. This feature allows developers to seamlessly implement necessary changes, ensuring their websites are not only ARIA-compliant but also more inclusive for users with disabilities. 
 
 ## TruLens Integration
 WebAlly integrates TruLens' text-to-text application for logging and feedback purposes. This integration allows us to continuously improve our LLM-based application by analyzing the feedback and refining our algorithms.
