@@ -3,7 +3,8 @@
 <a href="https://ibb.co/3k8PNQB"><img src="https://i.ibb.co/9GfdTSs/Screenshot-2024-02-23-at-12-44-13-PM.png" alt="Screenshot-2024-02-23-at-12-44-13-PM" border="0"></a>
 
 ## Overview
-WebAlly is an AI-powered code-writing software specifically designed for developers and designers to create ARIA-compliant websites. Its primary focus is on enhancing web accessibility for the disabled, particularly those with visual impairments. Leveraging the advanced capabilities of GPT-4 AI, WebAlly provides essential tools to make digital spaces more inclusive and accommodating.
+WebAlly is an AI-powered code-writing software specifically designed for developers and designers to create ARIA-compliant websites. Its primary focus is on enhancing web accessibility for the disabled, particularly those with visual impairments. Leveraging the advanced capabilities of GPT-4 AI, WebAlly provides essential tools to make digital spaces more inclusive and accommodating.  
+Techstack: OpenAI, GPT-4, TruLens, BeautifulSoup
 
 ## Key Functionalities
 
