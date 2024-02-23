@@ -1,8 +1,10 @@
 import requests
+import os
 from openai import OpenAI
 from bs4 import BeautifulSoup
 
-client = OpenAI(api_key='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') 
+api_key = os.getenv('OPENAI_API_KEY')
+client = OpenAI(api_key=api_key) 
 
 def scrape_website(url):
     # Fetch the HTML content
@@ -65,7 +67,7 @@ def generate_accessibility_report(html_content, css_files, js_files):
     """
 
     stream = client.chat.completions.create(
-        model="gpt-4",
+        model="gpt-4-0125-preview",
         messages=[{"role": "user", "content": prompt_issues}],
         stream=True,
     )
@@ -79,12 +81,12 @@ def generate_accessibility_report(html_content, css_files, js_files):
 def generate_aria_score(issues):
     # Construct the prompt for ARIA compliance score
     prompt_score = f"""
-    Given the following identified accessibility issues in the web page, evaluate its ARIA (Accessible Rich Internet Applications) compliance and provide a score on a scale of 0 to 10.
+    Given the following identified accessibility issues in the web page, evaluate its ARIA (Accessible Rich Internet Applications) compliance and provide a score between 0 to 10.
 
     Identified Accessibility Issues:
     {issues}
     
-    Provide an ARIA compliance score for the webpage based on these issues identified (return only the decimal).
+    Provide an ARIA compliance score for the webpage based on these issues identified (return only decimal number).
     """
 
     # Sending the prompt to get the ARIA score
@@ -102,6 +104,44 @@ def generate_aria_score(issues):
 
     return aria_score
 
+def implement_recommendations(html_content, css_files, recommendations):
+    # Combine CSS and JS content into single strings
+    css_content = '\n\n'.join(css_files.values())
+
+    # Construct the prompt for code modification
+    prompt_modification = f"""
+    The following web page code has several accessibility issues. Modify the code to implement the provided recommendations and improve accessibility.
+
+    Identified Accessibility Issues and Recommendations:
+    {recommendations}
+
+    Original HTML Code:
+    {html_content}
+
+    Original CSS Code:
+    {css_content}
+
+    Please provide the updated HTML, CSS code with the implemented recommendations.
+    """
+
+    # Sending the prompt to get the modified code
+    stream_modification = client.chat.completions.create(
+        model="gpt-4-0125-preview",
+        messages=[{"role": "user", "content": prompt_modification}],
+        stream=True,
+    )
+
+    # Iterate through the stream and capture the modified code
+    # modified_code = ""
+    # for chunk in stream_modification:
+    #     if chunk.choices[0].delta.content is not None:
+    #         modified_code += chunk.choices[0].delta.content
+
+    # return modified_code
+
+    for chunk in stream_modification:
+        if chunk.choices[0].delta.content is not None:
+            print(chunk.choices[0].delta.content, end="")
 
 
 # Let the user input the URL
@@ -117,3 +157,7 @@ print("Accessibility Issues and Recommendations:\n", accessibility_issues)
 print("\nCalculating ARIA Compliance Score...")
 aria_compliance_score = generate_aria_score(accessibility_issues)
 print("ARIA Compliance Score (out of 10):\n", aria_compliance_score)
+
+print("\nImplementing Recommendations in the Code...")
+updated_code = implement_recommendations(html_content, css_files, accessibility_issues)
+print("Updated Code with Implemented Recommendations:\n", updated_code)
