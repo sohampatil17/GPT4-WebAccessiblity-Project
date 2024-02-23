@@ -25,7 +25,7 @@ WebAlly integrates TruLens' text-to-text application for logging and feedback pu
 ## Getting Started
 
 streamlit run app.py  
-truelens-eval
+trulens-eval
 
 ---
 
