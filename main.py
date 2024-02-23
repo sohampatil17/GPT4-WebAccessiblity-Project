@@ -49,10 +49,9 @@ def scrape_website(url):
 
     return html_content, css_contents, js_contents
 
-def generate_accessibility_report(html_content, css_files, js_files):
+def generate_accessibility_report(html_content, css_files):
     # Combine CSS and JS content into single strings
     css_content = '\n\n'.join(css_files.values())
-    js_content = '\n\n'.join(js_files.values())
 
     # Construct the prompt for issues and recommendations
     prompt_issues = f"""
@@ -73,9 +72,11 @@ def generate_accessibility_report(html_content, css_files, js_files):
     )
 
     # Iterate through the stream and print the response
+    issues_and_recommendations = ""
     for chunk in stream:
         if chunk.choices[0].delta.content is not None:
-            print(chunk.choices[0].delta.content, end="")
+            issues_and_recommendations += chunk.choices[0].delta.content
+    return issues_and_recommendations
 
 
 def generate_aria_score(issues):
@@ -101,8 +102,8 @@ def generate_aria_score(issues):
     for chunk in stream_score:
         if chunk.choices[0].delta.content is not None:
             aria_score += chunk.choices[0].delta.content
-
-    return aria_score
+    
+    return aria_score.strip()
 
 def implement_recommendations(html_content, css_files, recommendations):
     # Combine CSS and JS content into single strings
@@ -139,25 +140,26 @@ def implement_recommendations(html_content, css_files, recommendations):
 
     # return modified_code
 
+    updated_code = ""
     for chunk in stream_modification:
         if chunk.choices[0].delta.content is not None:
-            print(chunk.choices[0].delta.content, end="")
+            updated_code += chunk.choices[0].delta.content
+    return updated_code
 
 
-# Let the user input the URL
-url = input("Enter the URL of the website to scrape: ")
-html_content, css_files, js_files = scrape_website(url)
-
-# Generate the accessibility report
-print("Generating Accessibility Report...")
-accessibility_issues = generate_accessibility_report(html_content, css_files, js_files)
-print("Accessibility Issues and Recommendations:\n", accessibility_issues)
-
-# Generate the ARIA compliance score
-print("\nCalculating ARIA Compliance Score...")
-aria_compliance_score = generate_aria_score(accessibility_issues)
-print("ARIA Compliance Score (out of 10):\n", aria_compliance_score)
-
-print("\nImplementing Recommendations in the Code...")
-updated_code = implement_recommendations(html_content, css_files, accessibility_issues)
-print("Updated Code with Implemented Recommendations:\n", updated_code)
+# Commenting out the standalone execution part
+# This part will be handled by Streamlit app
+'''
+if __name__ == "__main__":
+    url = input("Enter the URL of the website to scrape: ")
+    html_content, css_files, js_files = scrape_website(url)
+    print("Generating Accessibility Report...")
+    accessibility_issues = generate_accessibility_report(html_content, css_files, js_files)
+    print("Accessibility Issues and Recommendations:\n", accessibility_issues)
+    print("\nCalculating ARIA Compliance Score...")
+    aria_compliance_score = generate_aria_score(accessibility_issues)
+    print("ARIA Compliance Score (out of 10):\n", aria_compliance_score)
+    print("\nImplementing Recommendations in the Code...")
+    updated_code = implement_recommendations(html_content, css_files, accessibility_issues)
+    print("Updated Code with Implemented Recommendations:\n", updated_code)
+'''
