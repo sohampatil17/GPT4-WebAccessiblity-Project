@@ -7,11 +7,8 @@ WebAlly is an advanced web accessibility evaluation tool designed to enhance dig
 
 ## Key Functionalities
 
-### Website Scraping
-Upon receiving a URL input from the user, WebAlly extracts HTML and CSS content from the specified website. This initial step is crucial for a comprehensive accessibility evaluation.
-
 ### Accessibility Report Generation
-WebAlly analyzes the site for potential accessibility issues using the scraped content. It utilizes GPT-4's advanced capabilities to interpret the site's elements, identifying areas that may impede accessibility.
+After scraping the website code, WebAlly analyzes the site for potential accessibility issues using the scraped content. It utilizes GPT-4's advanced capabilities to interpret the site's elements, identifying areas that may impede accessibility.
 
 ### ARIA Compliance Scoring
 The application calculates an ARIA (Accessible Rich Internet Applications) compliance score on a scale of 0 to 10. This metric provides a quantitative assessment of the website's adherence to key accessibility standards.
