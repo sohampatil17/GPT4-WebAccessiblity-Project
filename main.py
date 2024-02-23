@@ -6,6 +6,8 @@ from trulens_eval import Feedback, OpenAI as fOpenAI, Tru, TruBasicApp
 
 api_key = os.getenv('OPENAI_API_KEY')
 client = OpenAI(api_key=api_key) 
+tru = Tru()
+tru.reset_database()
 
 def scrape_website(url):
     # Fetch the HTML content
@@ -66,18 +68,18 @@ def generate_accessibility_report(html_content, css_files):
     List any accessibility issues found in the code and provide between 4 to 7 specific recommendations to fix these issues.
     """
 
-    stream = client.chat.completions.create(
-        model="gpt-4-0125-preview",
-        messages=[{"role": "user", "content": prompt_issues}],
-        stream=True,
-    )
+    fopenai = fOpenAI()
+    f_relevance = Feedback(fopenai.relevance).on_input_output()
 
-    # Iterate through the stream and print the response
-    issues_and_recommendations = ""
-    for chunk in stream:
-        if chunk.choices[0].delta.content is not None:
-            issues_and_recommendations += chunk.choices[0].delta.content
-    return issues_and_recommendations
+    tru_llm_standalone_recorder = TruBasicApp(client.chat.completions.create, app_id="Accessibility Bot", feedbacks=[f_relevance])
+    with tru_llm_standalone_recorder as recording:
+        response = client.chat.completions.create(
+            model="gpt-4-0125-preview",
+            messages=[{"role": "user", "content": prompt_issues}]
+        )
+
+    # Process and return the response
+    return response.choices[0].message.content
 
 
 def generate_aria_score(issues):

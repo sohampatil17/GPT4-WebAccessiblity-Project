@@ -30,7 +30,7 @@ def process_url():
 
             # Column 2: Updated Code with Implemented Recommendations
             with col2:
-                st.subheader("Updated Code with Implemented Recommendations")
+                st.subheader("Updated Code")
                 st.write(updated_code)
 
 
