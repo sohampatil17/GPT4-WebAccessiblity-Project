@@ -1,5 +1,8 @@
 # WebAlly: GPT-4 Web Accessibility Project
 
+![Demo](https://ibb.co/3k8PNQB)
+
+
 ## Overview
 WebAlly is an advanced web accessibility evaluation tool designed to enhance digital inclusivity. It leverages the power of GPT-4 AI to provide detailed insights into website accessibility, aiming to make the digital world more accommodating for users with disabilities.
 
