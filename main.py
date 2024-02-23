@@ -2,6 +2,7 @@ import requests
 import os
 from openai import OpenAI
 from bs4 import BeautifulSoup
+from trulens_eval import Feedback, OpenAI as fOpenAI, Tru, TruBasicApp
 
 api_key = os.getenv('OPENAI_API_KEY')
 client = OpenAI(api_key=api_key) 

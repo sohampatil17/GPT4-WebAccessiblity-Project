@@ -9,20 +9,37 @@ def process_url():
         
         with st.spinner("Generating Accessibility Report..."):
             accessibility_issues = generate_accessibility_report(html_content, css_files)
-            st.write("Accessibility Issues and Recommendations:", accessibility_issues)
-
+            
         with st.spinner("Calculating ARIA Compliance Score..."):
             aria_compliance_score = generate_aria_score(accessibility_issues)
-            st.write("ARIA Compliance Score (out of 10):", aria_compliance_score)
+            
+        # Create two columns: One for Accessibility Report and one for Updated Code
+        col1, col2 = st.columns(2)
 
-        # If the user clicks the button, then update the code with recommendations
+        # Column 1: Accessibility Issues and Recommendations
+        with col1:
+            st.subheader("Accessibility Issues and Recommendations")
+            st.write(accessibility_issues)
+            st.subheader("ARIA Compliance Score")
+            st.markdown(f"<h1 style='text-align: center; color: red;'>{aria_compliance_score}</h1>", unsafe_allow_html=True)
+
+        # If the user clicks the button, update the code with recommendations
         if st.button("Implement Recommendations in Code"):
             with st.spinner("Updating code with recommendations..."):
                 updated_code = implement_recommendations(html_content, css_files, accessibility_issues)
-                st.write("Updated Code with Implemented Recommendations:", updated_code)
+
+            # Column 2: Updated Code with Implemented Recommendations
+            with col2:
+                st.subheader("Updated Code with Implemented Recommendations")
+                st.write(updated_code)
+
 
 def main():
-    st.title("Web Accessibility Evaluator")
+    
+    
+    st.set_page_config(layout="wide")
+    
+    st.markdown("<h1 style='text-align: center; font-size:50px;'> Web Accessibility Evaluator 💻🌐</h1>", unsafe_allow_html=True)
     
     # URL input with a key to reference in session_state
     url_input = st.text_input("Enter the URL of the website to scrape:", key='url')
