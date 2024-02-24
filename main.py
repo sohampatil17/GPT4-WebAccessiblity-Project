@@ -149,6 +149,7 @@ def implement_recommendations(html_content, css_files, recommendations):
             updated_code += chunk.choices[0].delta.content
     return updated_code
 
+tru.get_records_and_feedback(app_ids=[])[0]
 
 # Commenting out the standalone execution part
 # This part will be handled by Streamlit app

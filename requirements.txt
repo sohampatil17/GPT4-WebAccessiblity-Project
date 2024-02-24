@@ -1,0 +1,5 @@
+streamlit
+requests
+bs4
+openai
+trulens_eval

@@ -39,7 +39,7 @@ def main():
     
     st.set_page_config(layout="wide")
     
-    st.markdown("<h1 style='text-align: center; font-size:50px;'> Web Accessibility Evaluator 💻🌐</h1>", unsafe_allow_html=True)
+    st.markdown("<h1 style='text-align: center; font-size:50px;'> WebAlly 💻🌐</h1>", unsafe_allow_html=True)
     
     # URL input with a key to reference in session_state
     url_input = st.text_input("Enter the URL of the website to scrape:", key='url')
